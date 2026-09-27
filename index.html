@@ -3,158 +3,1066 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cicero Roberto da Silva Laurentino | Data Analyst & Information Systems</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Ícones FontAwesome -->
+    <title>Cicero Roberto da Silva Laurentino | Portfolio & Cover Letter</title>
+    
+    <!-- Google Fonts: Orbitron, Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Orbitron:wght@500;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6.4 Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #04070f;
+            --bg-card: rgba(10, 18, 34, 0.72);
+            --bg-card-hover: rgba(16, 28, 54, 0.90);
+            --border-glow: rgba(0, 242, 254, 0.22);
+            --border-glow-active: rgba(0, 242, 254, 0.85);
+            --primary-cyan: #00f2fe;
+            --primary-blue: #4facfe;
+            --accent-purple: #a855f7;
+            --accent-violet: #c084fc;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Interactive Particle & Grid Canvas */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* Ambient Glow Mesh Background */
+        .ambient-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 18% 22%, rgba(0, 242, 254, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 82% 78%, rgba(168, 85, 247, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(79, 172, 254, 0.05) 0%, transparent 60%);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Glassmorphism Panel Base */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Live Marquee Ticker */
+        .marquee-container {
+            background: rgba(0, 242, 254, 0.04);
+            border-bottom: 1px solid rgba(0, 242, 254, 0.15);
+            padding: 8px 0;
+            font-family: var(--font-code);
+            font-size: 0.82rem;
+            color: var(--primary-cyan);
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 28s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-right: 40px;
+        }
+
+        .marquee-item i {
+            color: var(--accent-purple);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Section Title Styling */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title i {
+            color: var(--primary-cyan);
+            font-size: 1.3rem;
+            filter: drop-shadow(0 0 8px var(--primary-cyan));
+        }
+
+        /* Hero / Header Section */
+        header.hero {
+            padding: 50px 0 35px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        /* Profile Photo Container (HUD Design) */
+        .profile-hud-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hud-frame {
+            position: relative;
+            width: 270px;
+            height: 270px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .hud-corner {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border-color: var(--primary-cyan);
+            border-style: solid;
+            pointer-events: none;
+            z-index: 5;
+            filter: drop-shadow(0 0 6px var(--primary-cyan));
+        }
+
+        .corner-tl { top: -4px; left: -4px; border-width: 3px 0 0 3px; }
+        .corner-tr { top: -4px; right: -4px; border-width: 3px 3px 0 0; }
+        .corner-bl { bottom: -4px; left: -4px; border-width: 0 0 3px 3px; }
+        .corner-br { bottom: -4px; right: -4px; border-width: 0 3px 3px 0; }
+
+        .ring-outer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px dashed rgba(0, 242, 254, 0.45);
+            animation: rotateClockwise 20s linear infinite;
+        }
+
+        .ring-inner {
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            border: 2px dotted rgba(168, 85, 247, 0.55);
+            animation: rotateCounterClockwise 15s linear infinite;
+        }
+
+        @keyframes rotateClockwise {
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateCounterClockwise {
+            100% { transform: rotate(-360deg); }
+        }
+
+        .profile-avatar-img {
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            border: 3px solid var(--primary-cyan);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+            filter: contrast(1.08) brightness(1.05);
+            transition: all 0.3s ease;
+        }
+
+        .hud-frame:hover .profile-avatar-img {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(0, 242, 254, 0.7);
+        }
+
+        .hud-status-tag {
+            position: absolute;
+            bottom: -6px;
+            background: rgba(4, 7, 15, 0.9);
+            border: 1px solid var(--primary-cyan);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            color: var(--primary-cyan);
+            letter-spacing: 1px;
+            z-index: 6;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+        }
+
+        .hud-status-tag .pulse-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary-cyan);
+            box-shadow: 0 0 8px var(--primary-cyan);
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        /* Hero Text Area */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--primary-cyan);
+            border-radius: 20px;
+            font-family: var(--font-code);
+            font-size: 0.78rem;
+            color: var(--primary-cyan);
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: 2.3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff 20%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .job-title {
+            font-family: var(--font-code);
+            color: var(--primary-cyan);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .hero .summary-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            max-width: 680px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 900px) {
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-family: var(--font-code);
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp {
+            background: rgba(37, 211, 102, 0.12);
+            border: 1px solid #25d366;
+            color: #25d366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #25d366;
+            color: #000;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-linkedin {
+            background: rgba(10, 102, 194, 0.12);
+            border: 1px solid #0a66c2;
+            color: #38bdf8;
+        }
+
+        .btn-linkedin:hover {
+            background: #0a66c2;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(10, 102, 194, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-github {
+            background: rgba(240, 246, 252, 0.1);
+            border: 1px solid rgba(240, 246, 252, 0.3);
+            color: #f0f6fc;
+        }
+
+        .btn-github:hover {
+            background: #f0f6fc;
+            color: #000;
+            box-shadow: 0 0 20px rgba(240, 246, 252, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Cover Letter Section */
+        .letter-section {
+            margin: 25px 0 45px;
+        }
+
+        .letter-card {
+            padding: 32px;
+        }
+
+        .letter-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: var(--font-code);
+            font-size: 0.88rem;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn.active {
+            background: rgba(0, 242, 254, 0.12);
+            color: var(--primary-cyan);
+            border: 1px solid var(--primary-cyan);
+        }
+
+        .letter-content {
+            display: none;
+            font-size: 0.96rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .letter-content.active {
+            display: block;
+        }
+
+        .letter-header-meta {
+            margin-bottom: 20px;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            color: var(--primary-cyan);
+            border-left: 3px solid var(--primary-cyan);
+            padding-left: 12px;
+        }
+
+        .letter-body p {
+            margin-bottom: 16px;
+        }
+
+        .letter-sign {
+            margin-top: 28px;
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        /* Competências & Certificações Hover Effects */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 45px;
+        }
+
+        .skill-card {
+            padding: 22px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 12px 30px rgba(0, 242, 254, 0.35);
+            background: var(--bg-card-hover);
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background: rgba(0, 242, 254, 0.1);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary-cyan);
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.18) rotate(6deg);
+            background: var(--primary-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--primary-cyan);
+        }
+
+        .skill-info h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .skill-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Repositórios GitHub Hover Effects (ELECTRIC ARCS / PURPLE LIGHTNING) */
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .repo-card {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .repo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-purple);
+            box-shadow: 0 12px 35px rgba(168, 85, 247, 0.45);
+            background: rgba(22, 18, 48, 0.9);
+        }
+
+        .repo-card:hover::before {
+            left: 100%;
+        }
+
+        .repo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        /* Folder Icon with Lightning Emitters */
+        .repo-folder-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .repo-folder-icon {
+            font-size: 1.5rem;
+            color: var(--primary-cyan);
+            transition: all 0.3s ease;
+        }
+
+        /* Lightning Arcs Container */
+        .electric-arcs {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .arc {
+            position: absolute;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-violet), #fff);
+            height: 2px;
+            border-radius: 2px;
+            box-shadow: 0 0 12px var(--accent-violet), 0 0 20px var(--accent-purple);
+            animation: arcSpark 0.4s infinite alternate;
+        }
+
+        .arc-1 { top: 15%; left: 10%; width: 35px; transform: rotate(-25deg); animation-delay: 0.05s; }
+        .arc-2 { top: 20%; right: 5%; width: 40px; transform: rotate(40deg); animation-delay: 0.12s; }
+        .arc-3 { bottom: 15%; left: 5%; width: 30px; transform: rotate(135deg); animation-delay: 0.2s; }
+        .arc-4 { bottom: 20%; right: 10%; width: 45px; transform: rotate(-110deg); animation-delay: 0.08s; }
+
+        @keyframes arcSpark {
+            0% { opacity: 0.2; transform: scaleX(0.6) rotate(0deg); }
+            50% { opacity: 1; filter: drop-shadow(0 0 8px #fff); }
+            100% { opacity: 0.4; transform: scaleX(1.2) rotate(10deg); }
+        }
+
+        .repo-card:hover .electric-arcs {
+            opacity: 1;
+        }
+
+        .repo-card:hover .repo-folder-icon {
+            color: var(--accent-violet);
+            transform: scale(1.25) rotate(-5deg);
+            filter: drop-shadow(0 0 15px var(--accent-purple));
+        }
+
+        .repo-title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: #fff;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .repo-card:hover .repo-title {
+            color: var(--accent-violet);
+        }
+
+        .repo-desc {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .repo-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .repo-tag {
+            font-family: var(--font-code);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--primary-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .repo-card:hover .repo-tag {
+            border-color: var(--accent-purple);
+            color: var(--accent-violet);
+            background: rgba(168, 85, 247, 0.12);
+        }
+
+        .btn-repo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            background: rgba(0, 242, 254, 0.08);
+            border: 1px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            text-decoration: none;
+            font-family: var(--font-code);
+            font-size: 0.78rem;
+            transition: all 0.3s ease;
+        }
+
+        .repo-card:hover .btn-repo {
+            background: var(--accent-purple);
+            border-color: var(--accent-violet);
+            color: #fff;
+            box-shadow: 0 0 18px rgba(168, 85, 247, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 30px 0;
+            background: rgba(2, 4, 10, 0.85);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer strong {
+            color: var(--primary-cyan);
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header / Hero Section -->
-    <header class="hero">
-        <div class="hero-glow-overlay"></div>
-        <div class="container hero-container">
-            <div class="hero-profile-wrapper">
-                <img src="https://github.com/CiceroRoberto.png" alt="Cicero Roberto da Silva Laurentino" class="profile-pic-header">
-                <span class="badge-status"><i class="fas fa-check-circle"></i> Cicero Laurentino</span>
+    <!-- Particle & Grid Background Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Ambient Mesh Glow Background -->
+    <div class="ambient-glow"></div>
+
+    <!-- Live Ticker Marquee Header -->
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <span class="marquee-item"><i class="fas fa-graduation-cap"></i> Bacharel em Sistemas de Informação (UNIESP)</span>
+            <span class="marquee-item"><i class="fas fa-globe-americas"></i> Inglês Fluente (5 Anos no Exterior - EUA/UK)</span>
+            <span class="marquee-item"><i class="fas fa-certificate"></i> Google IT Support Professional Certificate</span>
+            <span class="marquee-item"><i class="fas fa-chart-line"></i> IBM Data Analyst Professional Certificate</span>
+            <span class="marquee-item"><i class="fas fa-map-marker-alt"></i> Florianópolis, SC — Disponível para Oportunidades</span>
+            <!-- Duplicado para loop infinito sem falha -->
+            <span class="marquee-item"><i class="fas fa-graduation-cap"></i> Bacharel em Sistemas de Informação (UNIESP)</span>
+            <span class="marquee-item"><i class="fas fa-globe-americas"></i> Inglês Fluente (5 Anos no Exterior - EUA/UK)</span>
+            <span class="marquee-item"><i class="fas fa-certificate"></i> Google IT Support Professional Certificate</span>
+            <span class="marquee-item"><i class="fas fa-chart-line"></i> IBM Data Analyst Professional Certificate</span>
+            <span class="marquee-item"><i class="fas fa-map-marker-alt"></i> Florianópolis, SC — Disponível para Oportunidades</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero">
+            <div class="hero-grid">
+                <!-- Foto de Perfil Ampliada em Frame HUD -->
+                <div class="profile-hud-wrapper">
+                    <div class="hud-frame">
+                        <div class="hud-corner corner-tl"></div>
+                        <div class="hud-corner corner-tr"></div>
+                        <div class="hud-corner corner-bl"></div>
+                        <div class="hud-corner corner-br"></div>
+                        <div class="ring-outer"></div>
+                        <div class="ring-inner"></div>
+                        <img src="https://github.com/CiceroRoberto.png" alt="Cicero Roberto da Silva Laurentino" class="profile-avatar-img">
+                        <div class="hud-status-tag">
+                            <span class="pulse-dot"></span> SYSTEM ONLINE
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Texto e Atalhos Diretos -->
+                <div class="hero-text">
+                    <div class="status-badge">
+                        <i class="fas fa-check-circle"></i> DISPONÍVEL PARA CONTRATAÇÃO (FLORIANÓPOLIS & REMOTO)
+                    </div>
+                    <h1>Cícero Roberto da Silva Laurentino</h1>
+                    <div class="job-title">TÉCNICO EM INFORMÁTICA / SUPORTE TÉCNICO DE TI</div>
+                    <p class="summary-text">
+                        Graduado em Sistemas de Informação com sólida experiência em infraestrutura de TI, atendimento ao usuário, diagnóstico de software e redes. Agrego automação de rotinas via Python e manipulação de dados em SQL.
+                    </p>
+                    
+                    <div class="hero-actions">
+                        <a href="https://wa.me/5548991554400" target="_blank" class="btn-action btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> (48) 99155-4400
+                        </a>
+                        <a href="https://www.linkedin.com/in/cicero-laurentino-b1281351/" target="_blank" class="btn-action btn-linkedin">
+                            <i class="fab fa-linkedin"></i> LINKEDIN
+                        </a>
+                        <a href="https://github.com/CiceroRoberto" target="_blank" class="btn-action btn-github">
+                            <i class="fab fa-github"></i> GITHUB
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="hero-text">
-                <span class="tagline">DATA ANALYST | INFORMATION SYSTEMS | IT SUPPORT</span>
-                <h1>Cicero Roberto da Silva Laurentino</h1>
-                <p class="subtitle">Bacharel em Sistemas de Informação | IT Support, Análise de Dados, Python & Automação</p>
-                <div class="hero-buttons">
-                    <a href="https://github.com/CiceroRoberto" target="_blank" class="btn-social btn-github">
-                        <i class="fab fa-github"></i> GITHUB
-                    </a>
-                    <a href="https://www.linkedin.com/in/cicero-laurentino-b1281351/" target="_blank" class="btn-social btn-linkedin">
-                        <i class="fab fa-linkedin"></i> LINKEDIN
-                    </a>
+        </header>
+
+        <!-- Carta de Apresentação Bilíngue (PT/EN) -->
+        <section class="letter-section">
+            <div class="glass-panel letter-card">
+                <div class="letter-tabs">
+                    <button class="tab-btn active" onclick="switchTab('pt')">
+                        <i class="fas fa-flag"></i> CARTA DE APRESENTAÇÃO (PT)
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('en')">
+                        <i class="fas fa-globe"></i> COVER LETTER (EN)
+                    </button>
+                </div>
+
+                <!-- Conteúdo em Português -->
+                <div id="letter-pt" class="letter-content active">
+                    <div class="letter-header-meta">
+                        Florianópolis, SC — <span id="current-date-pt"></span> | À Equipe de Recrutamento e Seleção
+                    </div>
+                    <div class="letter-body">
+                        <p>
+                            Sou um profissional de tecnologia residente em Florianópolis, SC, graduado em <strong>Sistemas de Informação pela UNIESP Centro Universitário</strong>. Meu principal objetivo é atuar na área de Suporte Técnico de TI e Infraestrutura, unindo competências sólidas em manutenção de hardware, diagnóstico de softwares, redes e atendimento de excelência ao usuário.
+                        </p>
+                        <p>
+                            Meu perfil consolida uma base consistente em ambientes Windows e Linux, infraestrutura de redes locais e ferramentas essenciais de Help Desk e Service Desk. Além disso, agrego valor operacional através da proficiência em programação com Python e manipulação de dados via SQL, permitindo a automação de rotinas e o suporte analítico a incidentes e chamados.
+                        </p>
+                        <p>
+                            Busco constantemente aprimorar minhas competências técnicas e alinhar-me às demandas do mercado corporativo moderno. Atualmente, encontro-me em fase avançada de certificações internacionais de referência no Coursera: o <strong>Google IT Support Professional Certificate</strong>, que aprofunda meus conhecimentos em redes e administração de sistemas, e o <strong>IBM Data Analyst Professional Certificate</strong>, focado em análise avançada.
+                        </p>
+                        <p>
+                            Coloco-me à inteira disposição para uma entrevista, onde poderei detalhar melhor minha trajetória e meu entusiasmo em contribuir com a eficiência tecnológica e os objetivos da sua empresa. Agradeço desde já pela atenção e análise do meu perfil.
+                        </p>
+                    </div>
+                    <div class="letter-sign">
+                        Atenciosamente,<br>
+                        <strong>Cícero Roberto da Silva Laurentino</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">Técnico em Informática & Suporte de TI</span>
+                    </div>
+                </div>
+
+                <!-- Conteúdo em Inglês -->
+                <div id="letter-en" class="letter-content">
+                    <div class="letter-header-meta">
+                        Florianópolis, SC, Brazil — <span id="current-date-en"></span> | To the Recruitment & Hiring Team
+                    </div>
+                    <div class="letter-body">
+                        <p>
+                            I am an IT professional based in Florianópolis, SC, holding a Bachelor's degree in <strong>Information Systems from UNIESP University Center</strong>. My primary objective is to contribute as an IT Support Specialist and Infrastructure Analyst, combining strong skills in hardware maintenance, software troubleshooting, networking, and technical user support.
+                        </p>
+                        <p>
+                            My profile combines a solid foundation in Windows and Linux environments, local area networks (LAN), and core Help Desk / Service Desk methodologies. Furthermore, I bring operational value through my proficiency in Python scripting and SQL data manipulation, enabling process automation and analytical incident response.
+                        </p>
+                        <p>
+                            With <strong>5 years of international experience living abroad (USA/UK)</strong>, I have achieved native-level English fluency for seamless technical communication in global environments. Currently, I am advancing through key Coursera professional credentials: the <strong>Google IT Support Professional Certificate</strong> and the <strong>IBM Data Analyst Professional Certificate</strong>.
+                        </p>
+                        <p>
+                            I am readily available for an interview to discuss how my background and enthusiasm can drive operational efficiency and support your organization's goals. Thank you for your time and consideration.
+                        </p>
+                    </div>
+                    <div class="letter-sign">
+                        Sincerely,<br>
+                        <strong>Cícero Roberto da Silva Laurentino</strong><br>
+                        <span style="font-size: 0.85rem; color: var(--text-muted);">IT Support & Infrastructure Specialist</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competências e Certificações -->
+        <h2 class="section-title"><i class="fas fa-microchip"></i> COMPETÊNCIAS & CERTIFICAÇÕES</h2>
+        <div class="skills-grid">
+            <div class="glass-panel skill-card">
+                <div class="skill-icon"><i class="fas fa-headset"></i></div>
+                <div class="skill-info">
+                    <h3>Suporte de TI & Helpdesk</h3>
+                    <p>Atendimento ao usuário, gestão de chamados, suporte presencial/remoto e infraestrutura.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-card">
+                <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
+                <div class="skill-info">
+                    <h3>Redes & Sistemas</h3>
+                    <p>Configuração de redes locais (LAN/WAN), Windows, Linux, roteamento e protocolos TCP/IP.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-card">
+                <div class="skill-icon"><i class="fab fa-python"></i></div>
+                <div class="skill-info">
+                    <h3>Python & Automação</h3>
+                    <p>Scripts para automação de rotinas operacionais, tratamento de logs e tarefas repetitivas.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-card">
+                <div class="skill-icon"><i class="fas fa-database"></i></div>
+                <div class="skill-info">
+                    <h3>SQL & Bancos de Dados</h3>
+                    <p>Consultas, manipulação de dados relacionais e auxílio na resolução de incidentes.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-card">
+                <div class="skill-icon"><i class="fab fa-google"></i></div>
+                <div class="skill-info">
+                    <h3>Google IT Support Certificate</h3>
+                    <p>Especialização profissional em suporte técnico, redes e administração pelo Coursera.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel skill-card">
+                <div class="skill-icon"><i class="fas fa-globe"></i></div>
+                <div class="skill-info">
+                    <h3>Inglês Fluente (5 Anos Exterior)</h3>
+                    <p>Vivência internacional de 5 anos nos EUA e Reino Unido para atendimento corporativo global.</p>
                 </div>
             </div>
         </div>
-    </header>
 
-    <!-- Sobre Mim / About Me -->
-    <section class="about container">
-        <div class="about-content">
-            <img src="https://github.com/CiceroRoberto.png" alt="Cicero Roberto" class="profile-pic-about">
-            <div class="about-text">
-                <h2><i class="fas fa-chart-line"></i> SOBRE MIM / ABOUT ME</h2>
-                
-                <p class="bio-pt" style="margin-bottom: 15px;">
-                    Graduado em Sistemas de Informação com foco em IT Support, infraestrutura, análise de dados, manipulação de bancos de dados relacionais, automação com n8n e scripts em Python. Experiência na criação de rotinas analíticas, consultas SQL avançadas, integração de APIs e transformação de dados em insights estratégicos.
-                </p>
-
-                <p class="bio-en">
-                    Bachelor’s degree in Information Systems focused on IT Support, infrastructure, data analysis, relational database management, n8n workflow automation, and Python scripting. Experienced in developing analytical routines, advanced SQL queries, API integration, and transforming data into strategic insights.
+        <!-- Repositórios do GitHub -->
+        <h2 class="section-title"><i class="fas fa-code-branch"></i> REPOSITÓRIOS EM DESTAQUE (GITHUB)</h2>
+        <div class="repos-grid" id="github-repos-container">
+            <!-- Os cards de repositórios são carregados automaticamente via JavaScript -->
+            <div class="glass-panel repo-card">
+                <p style="color: var(--primary-cyan); font-family: var(--font-code);">
+                    <i class="fas fa-spinner fa-spin"></i> Conectando à API do GitHub...
                 </p>
             </div>
         </div>
-    </section>
-
-    <!-- Habilidades Tecnológicas -->
-    <section class="skills container">
-        <h2><i class="fas fa-microchip"></i> TECNOLOGIAS & FERRAMENTAS / SKILLS</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <i class="fas fa-headset"></i>
-                <span>IT Support & Help Desk</span>
-            </div>
-            <div class="skill-card">
-                <i class="fab fa-python"></i>
-                <span>Python (Pandas / Automação)</span>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-database"></i>
-                <span>SQL & Bancos Relacionais</span>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-cogs"></i>
-                <span>Automação de Workflows (n8n)</span>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-chart-bar"></i>
-                <span>Análise de Dados & Estatística</span>
-            </div>
-            <div class="skill-card">
-                <i class="fas fa-certificate"></i>
-                <span>Certificações Google / IBM / Santander</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Repositórios do GitHub -->
-    <section class="projects container">
-        <h2><i class="fas fa-code-branch"></i> MEUS REPOSITÓRIOS NO GITHUB</h2>
-        <div class="projects-grid" id="github-repos">
-            <p id="loading-text" style="color: #00f2fe; grid-column: 1 / -1;">Buscando repositórios no GitHub...</p>
-        </div>
-    </section>
+    </div>
 
     <!-- Rodapé -->
     <footer>
-        <div class="container footer-content">
-            <p>&copy; 2026 Cicero Roberto da Silva Laurentino. Hospedado via GitHub Pages.</p>
-            <div class="footer-links">
-                <a href="https://github.com/CiceroRoberto" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-                <a href="https://www.linkedin.com/in/cicero-laurentino-b1281351/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            </div>
+        <div class="container">
+            &copy; 2026 <strong>Cicero Roberto da Silva Laurentino</strong> — Florianópolis, SC. Hospedado via GitHub Pages.
         </div>
     </footer>
 
-    <!-- Script para listar repositórios do GitHub com links diretos -->
+    <!-- JavaScript Interativo -->
     <script>
-        const username = "CiceroRoberto";
-        const reposContainer = document.getElementById("github-repos");
+        // Data Atual Formatada
+        const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date-pt').innerText = new Date().toLocaleDateString('pt-BR', dateOptions);
+        document.getElementById('current-date-en').innerText = new Date().toLocaleDateString('en-US', dateOptions);
 
+        // Alternador de Abas da Carta de Apresentação
+        function switchTab(lang) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.letter-content').forEach(content => content.classList.remove('active'));
+
+            if (lang === 'pt') {
+                document.querySelectorAll('.tab-btn')[0].classList.add('active');
+                document.getElementById('letter-pt').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab-btn')[1].classList.add('active');
+                document.getElementById('letter-en').classList.add('active');
+            }
+        }
+
+        // Fundo Interativo de Partículas e Conexões (Canvas)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.speedY = (Math.random() - 0.5) * 0.6;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(0, 242, 254, 0.5)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor((canvas.width * canvas.height) / 16000), 65);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 242, 254, ${1 - dist / 110 * 0.8})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Integração com API do GitHub para carregar Repositórios
         async function fetchGitHubRepos() {
+            const container = document.getElementById('github-repos-container');
+            const username = 'CiceroRoberto';
+
             try {
-                const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
-                if (!response.ok) throw new Error("Erro ao carregar repositórios");
+                const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+                if (!response.ok) throw new Error('Falha ao carregar repositórios');
                 
                 const repos = await response.json();
-                reposContainer.innerHTML = "";
-
-                if (repos.length === 0) {
-                    reposContainer.innerHTML = "<p style='color: #8b949e;'>NENHUM REPOSITÓRIO PÚBLICO ENCONTRADO.</p>";
-                    return;
-                }
+                container.innerHTML = '';
 
                 repos.forEach(repo => {
-                    const description = repo.description || "Projeto cadastrado no repositório do GitHub.";
-                    const language = repo.language || "Código";
-                    const repoNameUpper = repo.name.toUpperCase();
-                    
-                    // Link direto e exato para o repositório do GitHub (ex: https://github.com/CiceroRoberto/nome-do-repositorio)
-                    const directRepoUrl = repo.html_url;
-                    
-                    const card = document.createElement("div");
-                    card.className = "project-card";
+                    const lang = repo.language || 'Code';
+                    const card = document.createElement('div');
+                    card.className = 'glass-panel repo-card';
+
                     card.innerHTML = `
-                        <h3>
-                            <a href="${directRepoUrl}" target="_blank" style="color: inherit; text-decoration: none;">
-                                ${repoNameUpper} <i class="fas fa-angle-right" style="font-size: 0.9rem; color: #00f2fe;"></i>
-                            </a>
-                        </h3>
-                        <p>${description}</p>
-                        <div class="tags">
-                            <span>${language.toUpperCase()}</span>
-                            ${repo.stargazers_count > 0 ? `<span>★ ${repo.stargazers_count}</span>` : ''}
+                        <div>
+                            <div class="repo-header">
+                                <div class="repo-folder-wrapper">
+                                    <i class="fas fa-folder repo-folder-icon"></i>
+                                    <div class="electric-arcs">
+                                        <div class="arc arc-1"></div>
+                                        <div class="arc arc-2"></div>
+                                        <div class="arc arc-3"></div>
+                                        <div class="arc arc-4"></div>
+                                    </div>
+                                </div>
+                                <span style="font-family: var(--font-code); font-size: 0.75rem; color: var(--text-muted);">
+                                    <i class="fas fa-star" style="color: #eab308;"></i> ${repo.stargazers_count}
+                                </span>
+                            </div>
+                            <h3 class="repo-title">${repo.name}</h3>
+                            <p class="repo-desc">${repo.description || 'Repositório de códigos e projetos de automação de TI.'}</p>
                         </div>
-                        <a href="${directRepoUrl}" target="_blank" class="btn-project">
-                            VER REPOSITÓRIO <i class="fas fa-external-link-alt"></i>
-                        </a>
+                        <div>
+                            <div class="repo-tags">
+                                <span class="repo-tag">${lang}</span>
+                                <span class="repo-tag">Git</span>
+                            </div>
+                            <a href="${repo.html_url}" target="_blank" class="btn-repo">
+                                VER NO GITHUB <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     `;
-                    reposContainer.appendChild(card);
+                    container.appendChild(card);
                 });
             } catch (error) {
-                console.error("Erro:", error);
-                reposContainer.innerHTML = `
-                    <div class="project-card">
-                        <h3>REPOSITÓRIOS NO GITHUB</h3>
-                        <p>Acesse diretamente meu perfil para visualizar todos os projetos cadastrados.</p>
-                        <a href="https://github.com/CiceroRoberto?tab=repositories" target="_blank" class="btn-project">
-                            ABRIR REPOSITÓRIOS NO GITHUB <i class="fas fa-external-link-alt"></i>
+                container.innerHTML = `
+                    <div class="glass-panel repo-card" style="grid-column: 1 / -1;">
+                        <h3 class="repo-title" style="color: var(--primary-cyan);">
+                            <i class="fab fa-github"></i> github.com/CiceroRoberto
+                        </h3>
+                        <p class="repo-desc">Acesse diretamente o perfil do GitHub para visualizar todos os repositórios e projetos atualizados.</p>
+                        <a href="https://github.com/CiceroRoberto" target="_blank" class="btn-repo" style="width: max-content; margin-top: 10px;">
+                            ABRIR PERFIL DO GITHUB <i class="fas fa-external-link-alt"></i>
                         </a>
                     </div>
                 `;
